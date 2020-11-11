@@ -26,7 +26,7 @@ public class DataSourceConfig {
             config.setJdbcUrl(dbURL);
             return new HikariDataSource(config);
         } else {
-            String urlString = "jdbc:mem:testdb";
+            String urlString = "jdbc:h2:mem:testdb";
             String driverClass = "org.h2.Driver";
             String dbUser = "sa";
             String password = "leaveitatdefault";
