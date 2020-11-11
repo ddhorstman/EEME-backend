@@ -2,6 +2,7 @@ package com.davidhorstman.eeme.services;
 
 import com.davidhorstman.eeme.models.Link;
 import com.davidhorstman.eeme.repositories.LinksRepository;
+import com.davidhorstman.eeme.views.EncodedLink;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,5 +33,21 @@ public class LinkServicesImpl implements LinkServices {
         return linksRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Could not find link with id '" + id + "'.")
         );
+    }
+
+    @Override
+    public Link findByEncodedId(String encoded) {
+        long linkId = Link.decode(encoded);
+        return findById(linkId);
+    }
+
+    @Override
+    public EncodedLink encode(Link link) {
+        EncodedLink el = new EncodedLink();
+        el.setOriginalUrl(link.getTarget());
+        String encodedUrl = Link.encode(link.getId());
+        encodedUrl = "http://localhost:2019/links/decode/" + encodedUrl;
+        el.setEncodedUrl(encodedUrl);
+        return el;
     }
 }

@@ -2,6 +2,7 @@ package com.davidhorstman.eeme.controllers;
 
 import com.davidhorstman.eeme.models.Link;
 import com.davidhorstman.eeme.services.LinkServices;
+import com.davidhorstman.eeme.views.EncodedLink;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,13 +30,19 @@ public class LinkController {
 
     @GetMapping(value = "/decode/{encoded}")
     public RedirectView decodeLink(RedirectAttributes attributes, @PathVariable String encoded){
-        long linkId = Link.decode(encoded);
-        String target = linkServices.findById(linkId).getTarget();
+        String target = linkServices.findByEncodedId(encoded).getTarget();
         return new RedirectView(target);
     }
 
     @PostMapping(value = "", consumes = "application/json", produces = "application/json")
     public ResponseEntity<?> newLink(@Valid @RequestBody Link link) {
         return new ResponseEntity<>(linkServices.save(link), HttpStatus.CREATED);
+    }
+
+    @PostMapping(value = "/encode", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<?> encodeLink(@Valid @RequestBody Link link){
+        link = linkServices.save(link);
+        EncodedLink encoded = linkServices.encode(link);
+        return new ResponseEntity<>(encoded, HttpStatus.CREATED);
     }
 }

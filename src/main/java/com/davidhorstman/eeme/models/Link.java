@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name="links")
+@Table(name = "links")
 public class Link {
 
     @Id
@@ -15,10 +15,15 @@ public class Link {
     @NotEmpty(message = "You must include a 'target' for the shortened link")
     private String target;
 
-    public Link(){}
+    public Link() {
+    }
 
     public static long decode(String encoded) {
         return Long.parseLong(encoded);
+    }
+
+    public static String encode(long id) {
+        return "" + id + "";
     }
 
     public long getId() {
