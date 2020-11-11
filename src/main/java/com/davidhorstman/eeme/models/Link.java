@@ -1,5 +1,7 @@
 package com.davidhorstman.eeme.models;
 
+import com.davidhorstman.eeme.utils.Encoder;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
@@ -18,12 +20,14 @@ public class Link {
     public Link() {
     }
 
+    private static char[] glyphs = {'e', 'm', 'E', 'M'};
+
     public static long decode(String encoded) {
-        return Long.parseLong(encoded);
+        return Encoder.decode(encoded, glyphs);
     }
 
     public static String encode(long id) {
-        return "" + id + "";
+        return Encoder.encode(id, glyphs);
     }
 
     public long getId() {
