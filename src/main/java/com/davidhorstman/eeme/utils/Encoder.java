@@ -1,5 +1,7 @@
 package com.davidhorstman.eeme.utils;
 
+import com.davidhorstman.eeme.exceptions.ResourceNotFoundException;
+
 public class Encoder {
     public static long decode(String encoded, char[] glyphs) {
         // Replace each glyph in the encoded string with the number it represents
@@ -8,7 +10,16 @@ public class Encoder {
         }
         // Parse the decoded number stored in the string
         // radix will always be the number of glyphs
-        return Long.parseLong(encoded, glyphs.length);
+        try {
+            return Long.parseLong(encoded, glyphs.length);
+        }
+        catch (Exception e){
+            // If any invalid characters were present in the string, return a 404
+            if(e instanceof NumberFormatException){
+                throw new ResourceNotFoundException("Could not decode link with path '"+encoded+"'.");
+            }
+            else throw e;
+        }
     }
 
     public static String encode(long id, char[] glyphs) {

@@ -1,12 +1,12 @@
 package com.davidhorstman.eeme.services;
 
+import com.davidhorstman.eeme.exceptions.ResourceNotFoundException;
 import com.davidhorstman.eeme.models.Link;
 import com.davidhorstman.eeme.repositories.LinksRepository;
 import com.davidhorstman.eeme.views.EncodedLink;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class LinkServicesImpl implements LinkServices {
     @Override
     public Link findById(long id) {
         return linksRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Could not find link with id '" + id + "'.")
+                () -> new ResourceNotFoundException("Could not find link with id '" + id + "'.")
         );
     }
 
