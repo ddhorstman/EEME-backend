@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
 
@@ -29,9 +28,9 @@ public class LinkController {
     }
 
     @GetMapping(value = "/decode/{encoded}")
-    public RedirectView decodeLink(RedirectAttributes attributes, @PathVariable String encoded){
-        String target = linkServices.findByEncodedId(encoded).getTarget();
-        return new RedirectView(target);
+    public ResponseEntity<?> decodeLink(RedirectAttributes attributes, @PathVariable String encoded) {
+        return new ResponseEntity<>(linkServices.findByEncodedId(encoded), HttpStatus.OK);
+
     }
 
     @PostMapping(value = "", consumes = "application/json", produces = "application/json")
@@ -40,7 +39,7 @@ public class LinkController {
     }
 
     @PostMapping(value = "/encode", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<?> encodeLink(@Valid @RequestBody Link link){
+    public ResponseEntity<?> encodeLink(@Valid @RequestBody Link link) {
         link = linkServices.save(link);
         EncodedLink encoded = linkServices.encode(link);
         return new ResponseEntity<>(encoded, HttpStatus.CREATED);

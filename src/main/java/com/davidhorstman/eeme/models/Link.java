@@ -1,7 +1,5 @@
 package com.davidhorstman.eeme.models;
 
-import com.davidhorstman.eeme.utils.Encoder;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
@@ -27,16 +25,6 @@ public class Link {
     public Link(long id, @NotEmpty(message = "You must include a 'target' for the shortened link") String target) {
         this.id = id;
         this.target = target;
-    }
-
-    private static char[] glyphs = {'e', 'm', 'E', 'M'};
-
-    public static long decode(String encoded) {
-        return Encoder.decode(encoded, glyphs);
-    }
-
-    public static String encode(long id) {
-        return Encoder.encode(id, glyphs);
     }
 
     public long getId() {

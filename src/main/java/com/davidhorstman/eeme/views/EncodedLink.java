@@ -1,30 +1,30 @@
 package com.davidhorstman.eeme.views;
 
-public class EncodedLink {
-    private String originalUrl;
-    private String encodedUrl;
+import com.davidhorstman.eeme.models.Link;
+import com.davidhorstman.eeme.utils.Encoder;
+
+public class EncodedLink extends Link {
+    private String encodedPath;
+
+    private static char[] glyphs = {'e', 'm', 'E', 'M'};
+
+    public static long decode(String encoded) {
+        return Encoder.decode(encoded, glyphs);
+    }
+
+    public static String encode(long id) {
+        return Encoder.encode(id, glyphs);
+    }
 
     public EncodedLink() {
     }
 
-    public EncodedLink(String originalUrl, String encodedUrl) {
-        this.originalUrl = originalUrl;
-        this.encodedUrl = encodedUrl;
+    public String getEncodedPath() {
+        return encodedPath;
     }
 
-    public String getOriginalUrl() {
-        return originalUrl;
+    public void setEncodedPath(String encodedPath) {
+        this.encodedPath = encodedPath;
     }
 
-    public void setOriginalUrl(String originalUrl) {
-        this.originalUrl = originalUrl;
-    }
-
-    public String getEncodedUrl() {
-        return encodedUrl;
-    }
-
-    public void setEncodedUrl(String encodedUrl) {
-        this.encodedUrl = encodedUrl;
-    }
 }

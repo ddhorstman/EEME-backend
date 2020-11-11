@@ -13,7 +13,7 @@ public interface LinkServices {
 
     Link findById(long id);
 
-    Link findByEncodedId(String encoded);
+    EncodedLink findByEncodedId(String encoded);
 
     EncodedLink encode(Link link);
 }

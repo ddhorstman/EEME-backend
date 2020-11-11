@@ -36,18 +36,23 @@ public class LinkServicesImpl implements LinkServices {
     }
 
     @Override
-    public Link findByEncodedId(String encoded) {
-        long linkId = Link.decode(encoded);
-        return findById(linkId);
+    public EncodedLink findByEncodedId(String encoded) {
+        long linkId = EncodedLink.decode(encoded);
+        Link link = findById(linkId);
+        EncodedLink el = new EncodedLink();
+        el.setTarget(link.getTarget());
+        el.setId(linkId);
+        el.setEncodedPath(encoded);
+        return el;
     }
 
     @Override
     public EncodedLink encode(Link link) {
         EncodedLink el = new EncodedLink();
-        el.setOriginalUrl(link.getTarget());
-        String encodedUrl = Link.encode(link.getId());
-        encodedUrl = "http://localhost:2019/links/decode/" + encodedUrl;
-        el.setEncodedUrl(encodedUrl);
+        String encodedUrl = EncodedLink.encode(link.getId());
+        el.setId(link.getId());
+        el.setTarget(link.getTarget());
+        el.setEncodedPath(encodedUrl);
         return el;
     }
 }
