@@ -17,6 +17,10 @@ public class Link {
 
     public Link(){}
 
+    public static long decode(String encoded) {
+        return Long.parseLong(encoded);
+    }
+
     public long getId() {
         return id;
     }

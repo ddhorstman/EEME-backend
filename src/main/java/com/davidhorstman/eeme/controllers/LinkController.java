@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.validation.Valid;
 
@@ -23,6 +25,13 @@ public class LinkController {
     @GetMapping(value = "/{id}", produces = "application/json")
     public ResponseEntity<?> getLinkById(@PathVariable long id) {
         return new ResponseEntity<>(linkServices.findById(id), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/decode/{encoded}")
+    public RedirectView decodeLink(RedirectAttributes attributes, @PathVariable String encoded){
+        long linkId = Link.decode(encoded);
+        String target = linkServices.findById(linkId).getTarget();
+        return new RedirectView(target);
     }
 
     @PostMapping(value = "", consumes = "application/json", produces = "application/json")
