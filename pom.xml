@@ -15,7 +15,7 @@
     <description>A URL me-ifier</description>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>8</java.version>
     </properties>
 
     <dependencies>
@@ -53,6 +53,7 @@
     </dependencies>
 
     <build>
+        <finalName>eeme</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
