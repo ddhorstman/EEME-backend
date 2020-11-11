@@ -22,8 +22,8 @@ public class SeedData implements CommandLineRunner {
     public void run(String... args) throws Exception {
         List<Link> links = new ArrayList<>();
         links.add(new Link(1, "https://www.lambdaschool.com"));
-        links.add(new Link(2, "https://docs.spring.io/spring-framework/docs/current/reference/html/"));
-        links.add(new Link(3, "https://www.google.com"));
+        links.add(new Link(2, "https://davidhorstman.com"));
+        links.add(new Link(3, "https://docs.spring.io/spring-framework/docs/current/reference/html/"));
         links.add(new Link(4, "https://davidhorstman.com"));
 
         links = (List<Link>) linksRepository.saveAll(links);

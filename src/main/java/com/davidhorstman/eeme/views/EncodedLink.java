@@ -6,7 +6,7 @@ import com.davidhorstman.eeme.utils.Encoder;
 public class EncodedLink extends Link {
     private String encodedPath;
 
-    private static char[] glyphs = {'e', 'm', 'E', 'M'};
+    private static char[] glyphs = {'e', 'm'/*, 'E', 'M'*/};
 
     public static long decode(String encoded) {
         return Encoder.decode(encoded, glyphs);
