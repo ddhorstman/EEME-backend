@@ -1,34 +1,34 @@
-//package com.davidhorstman.eeme;
-//
-//import com.davidhorstman.eeme.models.Link;
-//import com.davidhorstman.eeme.repositories.LinksRepository;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.CommandLineRunner;
-//import org.springframework.stereotype.Component;
-//
-//import javax.transaction.Transactional;
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//@Transactional
-//@Component
-//public class SeedData implements CommandLineRunner {
-//
-//    @Autowired
-//    private LinksRepository linksRepository;
-//
-//    @Transactional
-//    @Override
-//    public void run(String... args) throws Exception {
-//        List<Link> links = new ArrayList<>();
-//        links.add(new Link(1, "https://www.lambdaschool.com"));
-//        links.add(new Link(2, "https://davidhorstman.com"));
-//        links.add(new Link(3, "https://docs.spring.io/spring-framework/docs/current/reference/html/"));
-//        links.add(new Link(4, "https://davidhorstman.com"));
-//
-//        links = (List<Link>) linksRepository.saveAll(links);
-//    }
-//}
+package com.davidhorstman.eeme;
+
+import com.davidhorstman.eeme.models.Link;
+import com.davidhorstman.eeme.repositories.LinksRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.stereotype.Component;
+
+import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
+
+@Transactional
+@Component
+public class SeedData implements CommandLineRunner {
+
+    @Autowired
+    private LinksRepository linksRepository;
+
+    @Transactional
+    @Override
+    public void run(String... args) throws Exception {
+        List<Link> links = new ArrayList<>();
+        links.add(new Link(1, "https://www.lambdaschool.com"));
+        links.add(new Link(2, "https://davidhorstman.com"));
+        links.add(new Link(3, "https://docs.spring.io/spring-framework/docs/current/reference/html/"));
+        links.add(new Link(4, "https://davidhorstman.com"));
+
+        links = (List<Link>) linksRepository.saveAll(links);
+    }
+}
 
 //import com.github.javafaker.Faker;
 //import com.davidhorstman.orders.models.Agent;
