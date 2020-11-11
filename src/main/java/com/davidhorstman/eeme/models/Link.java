@@ -20,6 +20,15 @@ public class Link {
     public Link() {
     }
 
+    public Link(@NotEmpty(message = "You must include a 'target' for the shortened link") String target) {
+        this.target = target;
+    }
+
+    public Link(long id, @NotEmpty(message = "You must include a 'target' for the shortened link") String target) {
+        this.id = id;
+        this.target = target;
+    }
+
     private static char[] glyphs = {'e', 'm', 'E', 'M'};
 
     public static long decode(String encoded) {
